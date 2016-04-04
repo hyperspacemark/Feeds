@@ -1,0 +1,315 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4DCFC72B1CB2DD1900B647FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFC72A1CB2DD1900B647FF /* AppDelegate.swift */; };
+		4DCFC7321CB2DD1900B647FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DCFC7311CB2DD1900B647FF /* Assets.xcassets */; };
+		4DCFC7351CB2DD1900B647FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DCFC7331CB2DD1900B647FF /* LaunchScreen.storyboard */; };
+		4DCFC7431CB2DD8000B647FF /* DismissalAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFC73C1CB2DD8000B647FF /* DismissalAnimationController.swift */; };
+		4DCFC7441CB2DD8000B647FF /* DropDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFC73D1CB2DD8000B647FF /* DropDownButton.swift */; };
+		4DCFC7451CB2DD8000B647FF /* FeedListPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFC73E1CB2DD8000B647FF /* FeedListPresentationController.swift */; };
+		4DCFC7461CB2DD8000B647FF /* FeedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFC73F1CB2DD8000B647FF /* FeedListViewController.swift */; };
+		4DCFC7471CB2DD8000B647FF /* FeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFC7401CB2DD8000B647FF /* FeedsViewController.swift */; };
+		4DCFC7481CB2DD8000B647FF /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFC7411CB2DD8000B647FF /* LabelViewController.swift */; };
+		4DCFC7491CB2DD8000B647FF /* PresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFC7421CB2DD8000B647FF /* PresentationAnimationController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4DCFC7271CB2DD1900B647FF /* Feeds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Feeds.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DCFC72A1CB2DD1900B647FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4DCFC7311CB2DD1900B647FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4DCFC7341CB2DD1900B647FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4DCFC7361CB2DD1900B647FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DCFC73C1CB2DD8000B647FF /* DismissalAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissalAnimationController.swift; sourceTree = "<group>"; };
+		4DCFC73D1CB2DD8000B647FF /* DropDownButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownButton.swift; sourceTree = "<group>"; };
+		4DCFC73E1CB2DD8000B647FF /* FeedListPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedListPresentationController.swift; sourceTree = "<group>"; };
+		4DCFC73F1CB2DD8000B647FF /* FeedListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedListViewController.swift; sourceTree = "<group>"; };
+		4DCFC7401CB2DD8000B647FF /* FeedsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedsViewController.swift; sourceTree = "<group>"; };
+		4DCFC7411CB2DD8000B647FF /* LabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
+		4DCFC7421CB2DD8000B647FF /* PresentationAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationAnimationController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4DCFC7241CB2DD1900B647FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4DCFC71E1CB2DD1900B647FF = {
+			isa = PBXGroup;
+			children = (
+				4DCFC7291CB2DD1900B647FF /* Feeds */,
+				4DCFC7281CB2DD1900B647FF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4DCFC7281CB2DD1900B647FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4DCFC7271CB2DD1900B647FF /* Feeds.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4DCFC7291CB2DD1900B647FF /* Feeds */ = {
+			isa = PBXGroup;
+			children = (
+				4DCFC73C1CB2DD8000B647FF /* DismissalAnimationController.swift */,
+				4DCFC73D1CB2DD8000B647FF /* DropDownButton.swift */,
+				4DCFC73E1CB2DD8000B647FF /* FeedListPresentationController.swift */,
+				4DCFC73F1CB2DD8000B647FF /* FeedListViewController.swift */,
+				4DCFC7401CB2DD8000B647FF /* FeedsViewController.swift */,
+				4DCFC7411CB2DD8000B647FF /* LabelViewController.swift */,
+				4DCFC7421CB2DD8000B647FF /* PresentationAnimationController.swift */,
+				4DCFC72A1CB2DD1900B647FF /* AppDelegate.swift */,
+				4DCFC7311CB2DD1900B647FF /* Assets.xcassets */,
+				4DCFC7331CB2DD1900B647FF /* LaunchScreen.storyboard */,
+				4DCFC7361CB2DD1900B647FF /* Info.plist */,
+			);
+			path = Feeds;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4DCFC7261CB2DD1900B647FF /* Feeds */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DCFC7391CB2DD1900B647FF /* Build configuration list for PBXNativeTarget "Feeds" */;
+			buildPhases = (
+				4DCFC7231CB2DD1900B647FF /* Sources */,
+				4DCFC7241CB2DD1900B647FF /* Frameworks */,
+				4DCFC7251CB2DD1900B647FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Feeds;
+			productName = Feeds;
+			productReference = 4DCFC7271CB2DD1900B647FF /* Feeds.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4DCFC71F1CB2DD1900B647FF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Mark Adams";
+				TargetAttributes = {
+					4DCFC7261CB2DD1900B647FF = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 58WAG2ULA9;
+					};
+				};
+			};
+			buildConfigurationList = 4DCFC7221CB2DD1900B647FF /* Build configuration list for PBXProject "Feeds" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4DCFC71E1CB2DD1900B647FF;
+			productRefGroup = 4DCFC7281CB2DD1900B647FF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4DCFC7261CB2DD1900B647FF /* Feeds */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4DCFC7251CB2DD1900B647FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DCFC7351CB2DD1900B647FF /* LaunchScreen.storyboard in Resources */,
+				4DCFC7321CB2DD1900B647FF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4DCFC7231CB2DD1900B647FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DCFC7491CB2DD8000B647FF /* PresentationAnimationController.swift in Sources */,
+				4DCFC7471CB2DD8000B647FF /* FeedsViewController.swift in Sources */,
+				4DCFC7441CB2DD8000B647FF /* DropDownButton.swift in Sources */,
+				4DCFC7431CB2DD8000B647FF /* DismissalAnimationController.swift in Sources */,
+				4DCFC7461CB2DD8000B647FF /* FeedListViewController.swift in Sources */,
+				4DCFC7481CB2DD8000B647FF /* LabelViewController.swift in Sources */,
+				4DCFC72B1CB2DD1900B647FF /* AppDelegate.swift in Sources */,
+				4DCFC7451CB2DD8000B647FF /* FeedListPresentationController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4DCFC7331CB2DD1900B647FF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4DCFC7341CB2DD1900B647FF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4DCFC7371CB2DD1900B647FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4DCFC7381CB2DD1900B647FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4DCFC73A1CB2DD1900B647FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Feeds/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.markadams.Feeds;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		4DCFC73B1CB2DD1900B647FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Feeds/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.markadams.Feeds;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4DCFC7221CB2DD1900B647FF /* Build configuration list for PBXProject "Feeds" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DCFC7371CB2DD1900B647FF /* Debug */,
+				4DCFC7381CB2DD1900B647FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4DCFC7391CB2DD1900B647FF /* Build configuration list for PBXNativeTarget "Feeds" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DCFC73A1CB2DD1900B647FF /* Debug */,
+				4DCFC73B1CB2DD1900B647FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4DCFC71F1CB2DD1900B647FF /* Project object */;
+}
