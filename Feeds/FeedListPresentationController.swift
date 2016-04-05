@@ -60,7 +60,8 @@ final class FeedListPresentationController: UIPresentationController {
         dimmingView.alpha = 0
 
         let transitionCoordinator = presentingViewController.transitionCoordinator()
-        transitionCoordinator?.animateAlongsideTransition({ context in
+
+        UIView.animateWithDuration(0.25, animations: {
             self.navigationBar.alpha = 1
             self.dimmingView.alpha = 1
         }, completion: nil)

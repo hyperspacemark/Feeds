@@ -1,23 +1,48 @@
 import UIKit
 
-public final class FeedsViewController: UIViewController {
-    public var viewControllers: [UIViewController] = [] {
-        didSet {
-            guard let firstViewController = viewControllers.first else {
-                return
-            }
+final class FeedsViewController: UIViewController {
 
-            _navigationController.viewControllers = [firstViewController]
+    // MARK: - Properties
+
+    var viewControllers: [UIViewController] = [] {
+        didSet {
+            precondition(!viewControllers.containsNavigationOrTabBarControllers, "Provided view controllers should not contain UINavigationController or UITabBarController subclasses.")
+            selectedViewController = viewControllers.first
         }
     }
 
-    private var currentViewController: UIViewController? {
-        return _navigationController.viewControllers.first
+    var selectedViewController: UIViewController? {
+        didSet {
+            if let selectedViewController = selectedViewController {
+                precondition(viewControllers.contains(selectedViewController), "The provided selectedViewController must be a member of the viewControllers collection.")
+//                _navigationController.viewControllers = [selectedViewController]
+            }
+        }
     }
 
+    var selectedIndex: Int? {
+        guard let selectedViewController = selectedViewController else {
+            return nil
+        }
+
+        return viewControllers.indexOf(selectedViewController)
+    }
+
+
+    // MARK: - UIViewController
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        installNavigationController()
+    }
+
+
+    // MARK: - Private
+
     private lazy var _navigationController: UINavigationController = {
-        let navigationController = UINavigationController()
+        let navigationController = UINavigationController(rootViewController: AdjustmentViewController())
         navigationController.delegate = self
+        navigationController.view.translatesAutoresizingMaskIntoConstraints = false
         return navigationController
     }()
 
@@ -29,53 +54,59 @@ public final class FeedsViewController: UIViewController {
     }()
 
     @objc private func didTapTitleViewButton() {
-        guard let currentViewController = currentViewController, selectedIndex = viewControllers.indexOf(currentViewController) else {
-            return
-        }
-
         let feedListViewController = FeedListViewController(viewControllers: viewControllers, selectedIndex: selectedIndex)
         feedListViewController.delegate = self
-        feedListViewController.modalPresentationStyle = .Custom
-
         showViewController(feedListViewController, sender: nil)
     }
 
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-
+    private func installNavigationController() {
         addChildViewController(_navigationController)
         view.addSubview(_navigationController.view)
         _navigationController.didMoveToParentViewController(self)
-    }
 
-    public override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        _navigationController.view.frame = view.bounds
+        NSLayoutConstraint.activateConstraints([
+            _navigationController.view.topAnchor.constraintEqualToAnchor(view.topAnchor),
+            _navigationController.view.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
+            _navigationController.view.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor),
+            _navigationController.view.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor)
+        ])
     }
 }
+
 
 extension FeedsViewController: FeedListViewControllerDelegate {
-    public func feedListViewController(feedListViewController: FeedListViewController, didSelectViewController viewController: UIViewController) {
-        _navigationController.viewControllers = [viewController]
+    func feedListViewController(feedListViewController: FeedListViewController, didSelectViewController viewController: UIViewController) {
+//        selectedViewController = viewController
         feedListViewController.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    public func feedListViewControllerDidCancel(feedListViewController: FeedListViewController) {
+    func feedListViewControllerDidCancel(feedListViewController: FeedListViewController) {
         feedListViewController.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
+
 extension FeedsViewController: UINavigationControllerDelegate {
-    public func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
-        guard let rootViewController = navigationController.viewControllers.first where rootViewController == viewController else {
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        guard viewController == navigationController.viewControllers.first else {
             return
         }
 
-        titleViewButton.title = rootViewController.title
+        titleViewButton.title = "Animate"//viewController.title
         viewController.navigationItem.titleView = titleViewButton
     }
+}
 
-    @objc private func compose() {
-        
+
+private extension SequenceType where Generator.Element: UIViewController {
+    var containsNavigationOrTabBarControllers: Bool {
+        for viewController in self {
+            if viewController is UINavigationController || viewController is UITabBarController {
+                return true
+            }
+        }
+
+        return false
     }
+
 }

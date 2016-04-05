@@ -21,6 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        NSUserDefaults.standardUserDefaults().registerDefaults([
+            "Mass": 1.0,
+            "Stiffness": 500.0,
+            "Damping": 34,
+            "InitialVelocity": 0.0
+        ])
+
         let fvc = LabelViewController(title: "Friends Feed")
         let pvc = LabelViewController(title: "Public Feed")
         let vc = FeedsViewController()
