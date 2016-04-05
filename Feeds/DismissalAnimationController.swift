@@ -6,13 +6,11 @@ public final class DismissalAnimationController: NSObject, UIViewControllerAnima
     }
 
     public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        guard let
-            fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewKey),
-            initialFrame = transitionContext.initialFrameForViewController(fromViewController)
-        else {
+        guard let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) else {
             return
         }
-        
+
+        let initialFrame = transitionContext.initialFrameForViewController(fromViewController)
         let finalFrame = initialFrame.offsetBy(dx: 0, dy: -initialFrame.height)
 
         UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0, options: [], animations: {

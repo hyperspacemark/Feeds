@@ -8,8 +8,8 @@ public protocol FeedListViewControllerDelegate: class {
 public final class FeedListViewController: UIViewController {
 
     // MARK: - Properties
+
     weak var delegate: FeedListViewControllerDelegate?
-    var rowHeight: CGFloat = 44
 
     private let viewControllers: [UIViewController]
     private let selectedIndex: Int
@@ -18,7 +18,10 @@ public final class FeedListViewController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .Plain)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.scrollEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.tableFooterView = UIView()
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
 
@@ -43,8 +46,6 @@ public final class FeedListViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.tableFooterView = UIView()
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.addSubview(tableView)
 
         NSLayoutConstraint.activateConstraints([

@@ -1,6 +1,9 @@
 import UIKit
 
-public final class FeedListPresentationController: UIPresentationController {
+final class FeedListPresentationController: UIPresentationController {
+
+    // MARK: - Properties
+
     private var navigationBar: UIView {
         return navigationBarController.view
     }
@@ -11,75 +14,46 @@ public final class FeedListPresentationController: UIPresentationController {
         return controller
     }()
 
-    private let dimmingView: UIView = {
+    private lazy var dimmingView: UIView = {
         let view = UIView()
         view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapDimmingView))
+        view.addGestureRecognizer(tapGesture)
+
         return view
     }()
 
-    override public init(presentedViewController: UIViewController, presentingViewController: UIViewController) {
+
+    // MARK: - Initialization
+
+    override init(presentedViewController: UIViewController, presentingViewController: UIViewController) {
         super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
     }
 
-    public override func preferredContentSizeDidChangeForChildContentContainer(container: UIContentContainer) {
-        super.preferredContentSizeDidChangeForChildContentContainer(container)
 
-        if let container = container as? UIViewController where container == presentedViewController {
-            containerView?.setNeedsLayout()
-        }
-    }
+    // MARK: - UIPresentationController
 
-    public override func sizeForChildContentContainer(container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-        if let container = container as? UIViewController where container == presentedViewController {
-            return presentedViewController.preferredContentSize
-        } else {
-            return super.sizeForChildContentContainer(container, withParentContainerSize: parentSize)
-        }
-    }
-
-    public override func frameOfPresentedViewInContainerView() -> CGRect {
-        guard let containerView = containerView else {
-            return .zero
-        }
-
-        let presentedViewContentSize = sizeForChildContentContainer(presentedViewController, withParentContainerSize: containerView.bounds.size)
-
-        var presentedViewFrame = containerView.bounds
-        presentedViewFrame.size.height = presentedViewContentSize.height
-
-        return presentedViewFrame
-    }
-
-    public override func containerViewWillLayoutSubviews() {
-        super.containerViewWillLayoutSubviews()
-
-        if let containerView = containerView {
-            presentedView()?.frame = frameOfPresentedViewInContainerView()
-            dimmingView.frame = containerView.bounds
-        }
-    }
-
-    override public func presentationTransitionWillBegin() {
+    override func presentationTransitionWillBegin() {
         guard let containerView = containerView, parentContainerView = containerView.superview else {
             return
         }
 
-        containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.clipsToBounds = true
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(dimmingView)
 
         parentContainerView.insertSubview(navigationBar, aboveSubview: containerView)
-
-        containerView.addSubview(dimmingView)
 
         NSLayoutConstraint.activateConstraints([
             navigationBar.topAnchor.constraintEqualToAnchor(parentContainerView.topAnchor),
             navigationBar.leadingAnchor.constraintEqualToAnchor(parentContainerView.leadingAnchor),
             navigationBar.trailingAnchor.constraintEqualToAnchor(parentContainerView.trailingAnchor),
-            navigationBar.bottomAnchor.constraintEqualToAnchor(containerView.topAnchor),
+            containerView.topAnchor.constraintEqualToAnchor(navigationBar.bottomAnchor),
             containerView.leadingAnchor.constraintEqualToAnchor(parentContainerView.leadingAnchor),
             containerView.trailingAnchor.constraintEqualToAnchor(parentContainerView.trailingAnchor),
-            containerView.bottomAnchor.constraintEqualToAnchor(parentContainerView.bottomAnchor),
+            containerView.bottomAnchor.constraintEqualToAnchor(parentContainerView.bottomAnchor)
         ])
 
         navigationBar.alpha = 0
@@ -92,34 +66,85 @@ public final class FeedListPresentationController: UIPresentationController {
         }, completion: nil)
     }
 
-    override public func dismissalTransitionWillBegin() {
-        presentingViewController.transitionCoordinator()?.animateAlongsideTransition({ (context) in
-            self.dimmingView.alpha = 0
-            self.navigationBar.alpha = 0
-        }, completion: { (context) in
-            if context.isCancelled() == false {
-                self.dimmingView.removeFromSuperview()
-                self.navigationBar.removeFromSuperview()
-            }
-        })
-    }
-
-    override public func dismissalTransitionDidEnd(completed: Bool) {
+    override func presentationTransitionDidEnd(completed: Bool) {
         if !completed {
-            dimmingView.removeFromSuperview()
             navigationBar.removeFromSuperview()
         }
     }
+
+    override func dismissalTransitionWillBegin() {
+        presentingViewController.transitionCoordinator()?.animateAlongsideTransition({ (context) in
+            self.dimmingView.alpha = 0
+            self.navigationBar.alpha = 0
+        }, completion: nil)
+    }
+
+    override func dismissalTransitionDidEnd(completed: Bool) {
+        if completed {
+            navigationBar.removeFromSuperview()
+        }
+    }
+
+    override func containerViewWillLayoutSubviews() {
+        super.containerViewWillLayoutSubviews()
+        dimmingView.frame = containerView?.bounds ?? .zero
+        presentedView()?.frame = frameOfPresentedViewInContainerView()
+    }
+
+    override func frameOfPresentedViewInContainerView() -> CGRect {
+        guard let containerView = containerView else {
+            return .zero
+        }
+
+        let presentedViewContentSize = sizeForChildContentContainer(presentedViewController, withParentContainerSize: containerView.bounds.size)
+
+        var presentedViewFrame = containerView.bounds
+        presentedViewFrame.size.height = presentedViewContentSize.height
+
+        return presentedViewFrame
+    }
+
+    
+    // MARK: - UIContentContainer
+
+    override func preferredContentSizeDidChangeForChildContentContainer(container: UIContentContainer) {
+        super.preferredContentSizeDidChangeForChildContentContainer(container)
+
+        if let container = container as? UIViewController where container == presentedViewController {
+            containerView?.setNeedsLayout()
+        }
+    }
+
+    override func sizeForChildContentContainer(container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
+        if let container = container as? UIViewController where container == presentedViewController {
+            return presentedViewController.preferredContentSize
+        } else {
+            return super.sizeForChildContentContainer(container, withParentContainerSize: parentSize)
+        }
+    }
+
+
+    // MARK: - Private
+
+    @objc private func didTapDimmingView() {
+        presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+    }
 }
 
+
 final class NavigationBarController: UIViewController, UINavigationBarDelegate {
+
+    // MARK: - Properties
+
     private lazy var navigationBar: UINavigationBar = {
         let bar = UINavigationBar()
         bar.delegate = self
         bar.translatesAutoresizingMaskIntoConstraints = false
         return bar
-
     }()
+
+
+    // MARK: - Initialization
 
     init(navigationItem: UINavigationItem) {
         super.init(nibName: nil, bundle: nil)
@@ -130,8 +155,13 @@ final class NavigationBarController: UIViewController, UINavigationBarDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
+
+    // MARK: - UIViewController
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = .whiteColor()
         view.addSubview(navigationBar)
 
         NSLayoutConstraint.activateConstraints([
@@ -142,12 +172,15 @@ final class NavigationBarController: UIViewController, UINavigationBarDelegate {
         ])
     }
 
-    func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
-        return .TopAttached
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         preferredContentSize = navigationBar.bounds.size
+    }
+
+
+    // MARK: - UIBarPositioningDelegate
+
+    func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
+        return .TopAttached
     }
 }

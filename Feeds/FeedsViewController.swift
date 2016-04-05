@@ -73,7 +73,6 @@ extension FeedsViewController: UINavigationControllerDelegate {
 
         titleViewButton.title = rootViewController.title
         viewController.navigationItem.titleView = titleViewButton
-        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: "compose")
     }
 
     @objc private func compose() {
