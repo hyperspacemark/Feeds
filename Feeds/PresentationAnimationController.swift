@@ -11,6 +11,7 @@ public final class PresentationAnimationController: NSObject, UIViewControllerAn
         springAnimation.stiffness = CGFloat(NSUserDefaults.standardUserDefaults().floatForKey("Stiffness"))
         springAnimation.initialVelocity = CGFloat(NSUserDefaults.standardUserDefaults().floatForKey("InitialVelocity"))
         springAnimation.duration = springAnimation.settlingDuration
+        springAnimation.delegate = self
         return springAnimation
     }()
     
@@ -26,17 +27,21 @@ public final class PresentationAnimationController: NSObject, UIViewControllerAn
         transitionContext.containerView()?.addSubview(toViewController.view)
 
         springAnimation.fromValue = -finalFrame.midY
-        springAnimation.toValue = finalFrame.midY
         print(springAnimation.settlingDuration)
 
-            toViewController.view.layer.addAnimation(springAnimation, forKey: "YPosition")
-            toViewController.view.layer.position.y = finalFrame.midY
+        CATransaction.begin()
+        toViewController.view.layer.position.y = finalFrame.midY
+        toViewController.view.layer.addAnimation(springAnimation, forKey: "YPosition")
 
         UIView.animateWithDuration(springAnimation.settlingDuration, animations: {
+            CATransaction.commit()
+            print("View Start: \(CACurrentMediaTime())")
         }) { (_) in
+            print("View Stop: \(CACurrentMediaTime())")
             let transitionDidComplete = !transitionContext.transitionWasCancelled()
             transitionContext.completeTransition(transitionDidComplete)
         }
+
 
 //        UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0, options: [], animations: {
 //            toViewController.view.frame = finalFrame
@@ -44,5 +49,13 @@ public final class PresentationAnimationController: NSObject, UIViewControllerAn
 //            let transitionDidComplete = !transitionContext.transitionWasCancelled()
 //            transitionContext.completeTransition(transitionDidComplete)
 //        }
+    }
+
+    public override func animationDidStart(anim: CAAnimation) {
+        print("CA Start: \(CACurrentMediaTime())")
+    }
+
+    public override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+        print("CA Stop: \(CACurrentMediaTime()) - Finished: \(flag)")
     }
 }
