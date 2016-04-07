@@ -36,7 +36,11 @@ final class FeedListPresentationController: UIPresentationController {
     // MARK: - UIPresentationController
 
     override func presentationTransitionWillBegin() {
-        guard let containerView = containerView, parentContainerView = containerView.superview else {
+        guard let
+            containerView = containerView,
+            parentContainerView = containerView.superview,
+            presentedViewControllerView = super.presentedView()
+        else {
             return
         }
 
@@ -58,8 +62,6 @@ final class FeedListPresentationController: UIPresentationController {
 
         navigationBar.alpha = 0
         dimmingView.alpha = 0
-
-        let transitionCoordinator = presentingViewController.transitionCoordinator()
 
         UIView.animateWithDuration(0.25, animations: {
             self.navigationBar.alpha = 1
@@ -88,8 +90,14 @@ final class FeedListPresentationController: UIPresentationController {
 
     override func containerViewWillLayoutSubviews() {
         super.containerViewWillLayoutSubviews()
-        dimmingView.frame = containerView?.bounds ?? .zero
+
+        guard let containerView = containerView else {
+            return
+        }
+
+        dimmingView.frame = containerView.bounds
         presentedView()?.frame = frameOfPresentedViewInContainerView()
+        presentedView()?.adjustTopScrollViewInset(byAmount: containerView.frame.minY)
     }
 
     override func frameOfPresentedViewInContainerView() -> CGRect {
@@ -99,8 +107,11 @@ final class FeedListPresentationController: UIPresentationController {
 
         let presentedViewContentSize = sizeForChildContentContainer(presentedViewController, withParentContainerSize: containerView.bounds.size)
 
+        let offset = containerView.frame.minY
+
         var presentedViewFrame = containerView.bounds
-        presentedViewFrame.size.height = presentedViewContentSize.height
+        presentedViewFrame.origin.y -= offset
+        presentedViewFrame.size.height = presentedViewContentSize.height + offset
 
         return presentedViewFrame
     }
@@ -183,5 +194,22 @@ final class NavigationBarController: UIViewController, UINavigationBarDelegate {
 
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
         return .TopAttached
+    }
+}
+
+private extension UIView {
+    func adjustTopScrollViewInset(byAmount amount: CGFloat) {
+        let scrollView = findAdjustableScrollView()
+        scrollView?.contentInset.top = amount
+    }
+
+    func findAdjustableScrollView() -> UIScrollView? {
+        if let scrollView = self as? UIScrollView {
+            return scrollView
+        } else if let scrollView = subviews.first as? UIScrollView {
+            return scrollView
+        } else {
+            return nil
+        }
     }
 }
